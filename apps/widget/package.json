@@ -1,0 +1,27 @@
+{
+  "name": "@paykit/widget",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "typecheck": "tsc --noEmit",
+    "test": "echo no-tests"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "viem": "^2.21.0",
+    "wagmi": "^2.12.5",
+    "@rainbow-me/rainbowkit": "^2.1.9"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4"
+  }
+} 

@@ -1,0 +1,38 @@
+# Node
+node_modules/
+.pnpm-store/
+.pnp.*
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Env
+.env
+.env.*.local
+apps/**/.env
+apps/**/.env.*.local
+
+# Next.js
+.next/
+.vercel/
+out/
+
+# Prisma
+apps/api/prisma/dev.db*
+
+# TypeScript
+*.tsbuildinfo
+
+# Foundry
+contracts/cache/
+contracts/out/
+lib/
+
+# Misc
+coverage/
+dist/
+build/
+.idea/
+.vscode/ 

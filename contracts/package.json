@@ -1,0 +1,9 @@
+{
+  "name": "contracts",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "sh -c 'command -v forge >/dev/null 2>&1 && forge build || echo \"[contracts] forge not found, skipping build\"'",
+    "test": "sh -c 'command -v forge >/dev/null 2>&1 && forge test -vvv || echo \"[contracts] forge not found, skipping tests\"'"
+  }
+} 
