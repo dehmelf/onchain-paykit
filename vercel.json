@@ -1,0 +1,11 @@
+{
+  "buildCommand": "pnpm --filter @paykit/demo build",
+  "outputDirectory": "apps/demo/.next",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "rootDirectory": "./",
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet .",
+  "settings": {
+    "nodeVersion": "18.x"
+  }
+}
