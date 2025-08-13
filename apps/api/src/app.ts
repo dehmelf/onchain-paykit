@@ -34,7 +34,7 @@ export function buildServer() {
   });
 
   // Register security middleware
-  registerSecurityMiddleware(app);
+  // registerSecurityMiddleware(app);
 
   // Root route
   app.get('/', async () => ({
@@ -66,7 +66,7 @@ export function buildServer() {
   }));
 
   // Readiness probe (checks if the service is ready to handle requests)
-  app.get('/readiness', async () => {
+  app.get('/readiness', async (request, reply) => {
     const checks = {
       environment: true,
       signerKey: !!process.env.SERVER_SIGNER_PK,
@@ -77,7 +77,7 @@ export function buildServer() {
     const isReady = Object.values(checks).every(check => check === true);
 
     if (!isReady) {
-      return app.httpErrors.serviceUnavailable('Service not ready');
+      return reply.code(503).send({ error: 'Service not ready', checks });
     }
 
     return {

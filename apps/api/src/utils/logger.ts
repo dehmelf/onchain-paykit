@@ -54,7 +54,7 @@ export const createLogger = (options: any = {}) => {
         return {
           ...serialized,
           headers: redactSensitiveData(serialized.headers),
-          body: redactSensitiveData(serialized.body),
+          body: redactSensitiveData((serialized as any).body),
           query: redactSensitiveData(serialized.query),
           params: redactSensitiveData(serialized.params)
         };
