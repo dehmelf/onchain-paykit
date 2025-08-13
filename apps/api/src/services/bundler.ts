@@ -1,6 +1,6 @@
 import { createPublicClient, http, getAddress, type Hash } from 'viem';
 import { baseSepolia } from 'viem/chains';
-import { env } from '../utils/env';
+import { env } from '../utils/env.js';
 
 export type UserOperation = {
   sender: `0x${string}`;

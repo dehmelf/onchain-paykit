@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { signHmacSha256, verifyHmacSha256 } from '../utils/hmac';
+import { signHmacSha256, verifyHmacSha256 } from '../utils/hmac.js';
 
 const WebhookConfigBody = z.object({
   merchantId: z.string(),

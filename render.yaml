@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: paykit-demo
+    runtime: node
+    repo: https://github.com/YOUR_USERNAME/YOUR_REPO
+    branch: main
+    rootDir: apps/demo
+    buildCommand: cd ../.. && pnpm install && pnpm --filter @paykit/demo build
+    startCommand: pnpm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
+      - key: NEXT_PUBLIC_API_URL
+        value: https://YOUR_API_DOMAIN/api
+      - key: NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
+        sync: false
+      - key: NEXT_PUBLIC_CHAIN_ID
+        value: "84532"
+      - key: NEXT_PUBLIC_RPC_URL
+        value: https://sepolia.base.org
+      - key: NEXT_PUBLIC_PAYMASTER_ADDRESS
+        sync: false
+      - key: NEXT_PUBLIC_USDC_ADDRESS
+        sync: false
+      - key: NEXT_PUBLIC_COINBASE_APP_NAME
+        value: PayKit Demo

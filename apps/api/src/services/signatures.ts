@@ -1,6 +1,6 @@
 import { toHex, stringToBytes, keccak256 } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import { env } from '../utils/env';
+import { env } from '../utils/env.js';
 
 export type PaymentIntentTyped = {
   merchant: `0x${string}`;

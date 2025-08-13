@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import crypto from 'crypto';
-import { quoteUsdToUsdc } from '../services/quotes';
-import { createIntent } from '../services/intents';
-import { signPaymentIntent, toBytes32 } from '../services/signatures';
-import { env } from '../utils/env';
+import { quoteUsdToUsdc } from '../services/quotes.js';
+import { createIntent } from '../services/intents.js';
+import { signPaymentIntent, toBytes32 } from '../services/signatures.js';
+import { env } from '../utils/env.js';
 
 const Body = z.object({
   merchantId: z.string(),

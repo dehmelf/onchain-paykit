@@ -1,0 +1,60 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "functions": {
+    "api/index.ts": {
+      "maxDuration": 300,
+      "memory": 1024
+    },
+    "api/intents/*.ts": {
+      "maxDuration": 120,
+      "memory": 512
+    },
+    "api/payouts/*.ts": {
+      "maxDuration": 180,
+      "memory": 768
+    },
+    "api/webhooks/*.ts": {
+      "maxDuration": 60,
+      "memory": 256
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
+    }
+  ],
+  "public": true,
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "build": {
+    "env": {
+      "BUILD_TIME": "@BUILD_TIME"
+    }
+  }
+}

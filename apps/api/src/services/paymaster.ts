@@ -1,6 +1,6 @@
 import { createWalletClient, http, toHex, keccak256, encodePacked } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import { env } from '../utils/env';
+import { env } from '../utils/env.js';
 
 export type PaymasterPolicy = {
   intentId: string;
