@@ -1,12 +1,13 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { useAccount, useConnect, useDisconnect, useWalletClient, usePublicClient, useNetwork } from 'wagmi';
+import { useAccount, useConnect, useDisconnect, useWalletClient, usePublicClient, useNetwork, useChainId } from 'wagmi';
+import { useChains } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { PayKitButton } from '@paykit/widget';
 import { parseEther, formatEther, encodeFunctionData, keccak256, toBytes } from 'viem';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const API_BASE = 'http://localhost:4000';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 // Contract addresses on Base Sepolia
 const CONTRACTS = {
@@ -260,6 +261,9 @@ export default function PayKitDemo() {
   const { address, isConnected } = useAccount();
   const { data: walletClient } = useWalletClient();
   const publicClient = usePublicClient();
+  const chainId = useChainId();
+  const chains = useChains();
+  const chain = chains.find(c => c.id === chainId);
 
   // State management
   const [activeTab, setActiveTab] = useState('overview');
