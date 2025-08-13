@@ -51,10 +51,5 @@
   "public": true,
   "env": {
     "NODE_ENV": "production"
-  },
-  "build": {
-    "env": {
-      "BUILD_TIME": "@BUILD_TIME"
-    }
   }
 }
