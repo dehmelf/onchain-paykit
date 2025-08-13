@@ -3,17 +3,21 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch src/dev.ts",
+    "dev:once": "tsx src/dev.ts",
     "build": "tsc -b",
-    "start": "node dist/index.js",
+    "start": "node dist/dev.js",
     "typecheck": "tsc --noEmit",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
     "test": "vitest run || true"
   },
   "dependencies": {
-    "@fastify/cors": "^11.1.0",
+    "@fastify/cors": "^9.0.1",
     "@prisma/client": "^5.18.0",
     "bullmq": "^5.9.0",
     "dotenv": "^16.4.5",
@@ -26,7 +30,7 @@
   "devDependencies": {
     "@types/node": "^20.14.10",
     "prisma": "^5.18.0",
-    "tsx": "^4.17.0",
+    "tsx": "^4.16.0",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
   }
