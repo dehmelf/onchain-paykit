@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import { Script } from "forge-std/Script.sol";
+import { Script, console } from "forge-std/Script.sol";
 import { MerchantRegistry } from "../src/MerchantRegistry.sol";
 import { USDCVault } from "../src/USDCVault.sol";
 import { PaymentRouter } from "../src/PaymentRouter.sol";
 import { Paymaster } from "../src/Paymaster.sol";
 import { FeeSplitter } from "../src/FeeSplitter.sol";
+import { MockUSDC } from "../src/MockUSDC.sol";
 
 contract DeployScript is Script {
     function run() external {
@@ -19,6 +20,9 @@ contract DeployScript is Script {
         address feeRecipient = vm.envAddress("FEE_RECIPIENT");
         
         vm.startBroadcast(deployerPrivateKey);
+        
+        // Use existing USDC contract on Base Sepolia
+        console.log("Using USDC at:", usdcAddress);
         
         console.log("Deploying contracts with deployer:", deployer);
         console.log("USDC Address:", usdcAddress);
@@ -71,6 +75,7 @@ contract DeployScript is Script {
         
         // Output deployment summary
         console.log("\n=== Deployment Summary ===");
+        console.log("USDC:", usdcAddress);
         console.log("MerchantRegistry:", address(registry));
         console.log("USDCVault:", address(vaultWithRouter));
         console.log("PaymentRouter:", address(routerWithVault));

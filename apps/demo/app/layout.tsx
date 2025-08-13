@@ -4,50 +4,84 @@ import { WagmiProvider, createConfig, http } from 'wagmi';
 import { baseSepolia } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RainbowKitProvider, getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { coinbaseWallet, metaMask } from 'wagmi/connectors';
 import '@rainbow-me/rainbowkit/styles.css';
+import './globals.css';
 
 const config = getDefaultConfig({
   appName: 'PayKit Demo',
   projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID || 'demo',
   chains: [baseSepolia],
-  connectors: [
-    coinbaseWallet({ appName: 'PayKit Demo' }),
-    metaMask()
-  ],
   transports: {
     [baseSepolia.id]: http('https://sepolia.base.org')
   }
 });
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Suppress console errors in development
+  React.useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      const originalError = console.error;
+      const originalWarn = console.warn;
+      
+      console.error = (...args) => {
+        const message = args.join(' ');
+        if (
+          message.includes('indexedDB is not defined') ||
+          message.includes('WalletConnect Core is already initialized') ||
+          message.includes('pino-pretty') ||
+          message.includes('unhandledRejection') ||
+          message.includes('webpack-internal') ||
+          message.includes('Critical dependency') ||
+          message.includes('Module not found')
+        ) {
+          return;
+        }
+        originalError.apply(console, args);
+      };
+      
+      console.warn = (...args) => {
+        const message = args.join(' ');
+        if (
+          message.includes('Module not found') ||
+          message.includes('pino-pretty') ||
+          message.includes('webpack')
+        ) {
+          return;
+        }
+        originalWarn.apply(console, args);
+      };
+    }
+  }, []);
+
   return (
     <html lang="en">
       <head>
-        <title>PayKit Demo - Base Sepolia</title>
-        <meta name="description" content="Interactive demo of PayKit on Base Sepolia" />
+        <title>PayKit • Modern USDC Payments on Base</title>
+        <meta name="description" content="Experience the future of payments with USDC on Base Sepolia, powered by ERC-4337 smart wallets and gasless transactions" />
       </head>
-      <body style={{ margin: 0, fontFamily: 'system-ui, sans-serif' }}>
+      <body className="scroll-smooth">
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>
             <RainbowKitProvider>
-              <div style={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
-                <header style={{ 
-                  backgroundColor: '#0052ff', 
-                  color: 'white', 
-                  padding: '1rem',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                }}>
-                  <h1 style={{ margin: 0, fontSize: '1.5rem' }}>
-                    PayKit Demo - Base Sepolia
-                  </h1>
-                  <p style={{ margin: '0.5rem 0 0 0', opacity: 0.9 }}>
-                    Interactive USDC payments with ERC-4337 smart wallets
-                  </p>
-                </header>
-                <main>{children}</main>
+              <div className="min-h-screen relative overflow-hidden">
+                {/* Floating Background Orbs */}
+                <div className="floating-orb"></div>
+                <div className="floating-orb"></div>
+                <div className="floating-orb"></div>
+                
+                {/* Main Content */}
+                <div className="relative z-10">
+                  {children}
+                </div>
               </div>
             </RainbowKitProvider>
           </QueryClientProvider>
@@ -55,4 +89,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
-} 
+}
