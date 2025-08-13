@@ -14,7 +14,7 @@ const Body = z.object({
   payerHint: z.string().optional()
 }).refine(b => !!b.amountUsd || !!b.productId, { message: 'amountUsd or productId required' });
 
-export function registerIntentRoutes(app: any) {
+export async function registerIntentRoutes(app: any) {
   app.post('/v1/intents', async (req: any, reply: any) => {
     const body = Body.parse(req.body);
     const amountUSDC = quoteUsdToUsdc(body.amountUsd ?? 0);
