@@ -3,9 +3,5 @@
   "outputDirectory": "apps/demo/.next",
   "installCommand": "pnpm install",
   "framework": "nextjs",
-  "rootDirectory": "./",
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet .",
-  "settings": {
-    "nodeVersion": "18.x"
-  }
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet ."
 }
